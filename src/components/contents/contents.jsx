@@ -63,7 +63,7 @@ function Contents(props)
         return(
             <div className={`${classes.contents} ${classes.contents_geometry} block`}>
                 <Routes>
-                    <Route path="/" element={<Result  setPage={function() { setState("game")}} />}/>
+                    <Route path="/" element={<Start  setPage={function() { setState("game")}} />}/>
                     <Route path="/records" element={<Records records={props.records} newRecord={props.newRecord} clearRecord={props.clearRecord} setPage={function() { setState("start")}} />} />
                     <Route path="/about" element={<About setPage={function() { setState("start")}} /> }/>
                 </Routes>
