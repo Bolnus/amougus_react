@@ -1,0 +1,66 @@
+.mainMenu
+{
+    padding: 1em;
+    color: #777777;
+}
+
+.mainMenu_geometry
+{
+    width: 10%;
+    height: 100%;
+    float: left;
+    margin: 10px;
+    margin-left: 15%;
+    margin-right: 5px;
+}
+
+.listMenu
+{
+    font-size: 1.8em;
+    line-height: 2em;
+    list-style: none;
+}
+
+.listMenu li
+{
+    border-radius: 5px;
+    padding-right: 1em;
+    padding-left: 1em;
+    background-size: contain;
+    list-style-type: none;
+    background-repeat: no-repeat;
+    background-position: left center;
+    text-indent: 25px;
+}
+
+.listMenu li:hover
+{
+    background: #444446;
+    color: white;
+    cursor: pointer;
+}
+
+.listMenu li a
+{
+    color: inherit;
+    font-style: normal;
+    text-decoration: none;
+    display: block;
+    width: inherit;
+    height: inherit;
+}
+
+.listMenu__start
+{
+    background-image: url("../../pixmaps/menu_start_transparent.png");
+}
+
+.listMenu__records
+{
+    background-image: url("../../pixmaps/menu_record_transparent.png");
+}
+
+.listMenu__about
+{
+    background-image: url("../../pixmaps/menu_stop_transparent.png");
+}

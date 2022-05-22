@@ -1,0 +1,19 @@
+.aboutPage
+{
+    display: inline-block;
+    padding: 3vh;
+}
+
+.aboutPage__header
+{
+    color: #b9b9ba;
+    font-size: 2em;
+    /*margin-bottom: 1em;*/
+}
+
+.aboutPage__text
+{
+    font-size: 1.5em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}

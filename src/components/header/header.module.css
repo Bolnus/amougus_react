@@ -1,0 +1,22 @@
+.header
+{
+    /*text-align: center;*/
+    padding-top: 1em;
+    border-bottom: 3px solid #444446;
+    font-size: 2em;
+    font-weight: 550;
+    line-height: 2em;
+    /* position: fixed; */
+}
+
+.header_geometry
+{
+    width: 100%;
+    height: 8vh;
+}
+
+.headerName
+{
+    float: left;
+    margin-left: 16%;
+}

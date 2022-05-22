@@ -1,0 +1,16 @@
+.contents
+{
+    /* margin-top: 300px; */
+    padding: 1em;
+    display: flex;
+}
+
+.contents_geometry
+{
+    width: 50%;
+    height: 85vh;
+    float: left;
+    margin: 10px;
+    margin-left: 5px;
+    margin-right: 10%;
+}

@@ -1,0 +1,43 @@
+.recordsPage
+{
+    overflow-y: scroll;
+}
+
+.recordsPage__table
+{
+    border: 1;
+    font-size: 2em;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+    border-style: hidden;
+}
+
+.recordsPage__table td
+{
+    border: 3px solid #ffffff;
+    padding: 0.5em;
+    color: #b9b9ba;
+}
+
+.recordsPage__table th
+{
+    border: 3px solid white;
+    padding: 0.5em;
+}
+
+.recordsPage__caption
+{
+    padding: 1em;
+}
+
+.recordsPage__highlightedRow
+{
+    background: green;
+}
+
+.recordsPage__table tr:hover
+{
+    background: #444446;
+    cursor: pointer;
+}
