@@ -9,7 +9,7 @@ let chainCount = 0;
 let fastTimer;
 let gamePage__timer = React.createRef();
 let cbSetPage;
-let setRecord;
+let cb_setRecord;
 
 function on_pb_clicked(buttonNumber)
 {
@@ -108,6 +108,10 @@ function stopWatch()
 
 function userFailed(count)
 {
+    if(gamePage__pushButton[0].current==null)
+    {
+        return;
+    }
     switch(count)
     {
         case 0:
@@ -143,7 +147,7 @@ function userSucceeded()
     }
     //console.log(gamePage__timer.current.innerHTML);
     chainCount=0;
-    setRecord(gamePage__timer.current.innerHTML.replace(/:/g,'-'));
+    cb_setRecord(gamePage__timer.current.innerHTML.replace(/:/g,'-'));
     // if(!writeResult)
     cbSetPage();
 
@@ -155,7 +159,7 @@ function userSucceeded()
 function Game(props)
 {
     cbSetPage=props.setPage;
-    setRecord=props.recordSetter;
+    cb_setRecord=props.prepareRecord;
     clearTimeout(fastTimer);
     createButtons();
     chainCount=0;

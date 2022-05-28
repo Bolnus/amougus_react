@@ -15,7 +15,7 @@ function Records(props)
     if(props.newRecord.hasOwnProperty("place"))
     {
         newRow=props.newRecord.place;
-        //props.clearRecord();
+        console.log("place:"+props.newRecord.place);
     }
     props.setPage();
     count = 0;

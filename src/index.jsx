@@ -1,17 +1,36 @@
-//import React from 'react';
-//import ReactDOM from 'react-dom';
-//import './index.css';
-//import './main.css';
-//import App from './App';
-//import Header from './components/header/header.jsx';
-//import MainMenu from './components/main_menu/main-menu.jsx'; //./components/main_menu/main-menu.jsx
-//import Contents from './components/contents/contents.jsx';
-import reportWebVitals from './reportWebVitals';
-//import {BrowserRouter} from "react-router-dom";
-import state from "./redux/state.jsx";
-import {rerenderEntireTree} from "./render.jsx";
+import store from "./redux/state.jsx";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-rerenderEntireTree(state);
+import './main.css';
+
+import Header from './components/header/header.jsx';
+import MainMenu from './components/main_menu/main-menu.jsx'; //./components/main_menu/main-menu.jsx
+import Contents from './components/contents/contents.jsx';
+import reportWebVitals from './reportWebVitals';
+import {BrowserRouter} from "react-router-dom";
+import {prepareRecord} from "./redux/state.jsx";
+import {writeRecord} from "./redux/state.jsx";
+import {updateNewRecordName} from "./redux/state.jsx";
+import {clearRecord} from "./redux/state.jsx"
+import {subscribe} from "./redux/state.jsx"
+
+function rerenderEntireTree(currentStore)
+{
+    return ReactDOM.render(
+        <React.StrictMode>
+            <BrowserRouter>
+                <Header/>
+                <MainMenu clearRecord={currentStore.clearRecord.bind(currentStore)}/>
+                <Contents store={currentStore}/>
+            </ BrowserRouter>
+        </React.StrictMode>,
+        document.getElementById('root')
+    );
+}
+
+rerenderEntireTree(store);
+store.subscribe(rerenderEntireTree);
 
 
 
