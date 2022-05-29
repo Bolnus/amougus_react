@@ -3,6 +3,7 @@ import React from "react";
 import {useEffect} from "react";
 import {Link, NavLink} from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import {updateNewRecordNameActionCreator, writeRecordActionCreator} from "../../../redux/state";
 
 let buttonUps = [];
 let buttonDowns = [];
@@ -38,7 +39,7 @@ function on_pbUp_clicked(number)
         else
             nameStr1[number]=alphabet[currentLetterNumber]; //namePage__letter[number].current.innerHTML
         //console.log(nameStr1.join(''));
-        dispatch({type: "UPDATE-NEW-RECORD-NAME",newName: nameStr1.join('')});
+        dispatch(updateNewRecordNameActionCreator(nameStr1.join('')));
         //cb_updateName(nameStr1.join(''));//
     }
 
@@ -59,7 +60,7 @@ function on_pbDown_clicked(number)
         else
             nameStr1[number]=alphabet[currentLetterNumber]; //namePage__letter[number].current.innerHTML
         //cb_updateName(nameStr1.join(''));
-        dispatch({type: "UPDATE-NEW-RECORD-NAME",newName: nameStr1.join('')});
+        dispatch(updateNewRecordNameActionCreator(nameStr1.join('')));
     }
 }
 
@@ -111,7 +112,7 @@ function Name(props)
     {
         event.preventDefault();
         console.log("writeRec");
-        props.dispatch({type: "WRITE-RECORD"});
+        props.dispatch(writeRecordActionCreator());
 
         navigate("/records");
         //props.setPage();

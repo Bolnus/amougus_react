@@ -1,6 +1,7 @@
 import classes from './start.module.css';
 
 import React from "react";
+import {prepareRecordActionCreator} from "../../../redux/state";
 
 let gamePage__pushButton = [];
 let buttons1 = [];
@@ -148,7 +149,7 @@ function userSucceeded()
     }
     //console.log(gamePage__timer.current.innerHTML);
     chainCount=0;
-    dispatch({type: "PREPARE-RECORD", result: gamePage__timer.current.innerHTML.replace(/:/g,'-')});
+    dispatch(prepareRecordActionCreator(gamePage__timer.current.innerHTML.replace(/:/g,'-')));
     // if(!writeResult)
     cb_SetPage();
 

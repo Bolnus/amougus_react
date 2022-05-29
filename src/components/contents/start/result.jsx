@@ -1,6 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import classes from "./start.module.css";
 import React from "react";
+import {clearRecordActionCreator} from "../../../redux/state";
 
 let cb_setPage;
 //let cb_clearRecord;
@@ -11,7 +12,7 @@ function pushButton_close_clicked()
     // return function()
     // {
         //cb_clearRecord();
-    dispatch({type: "CLEAR-RECORD"});
+    dispatch(clearRecordActionCreator());
     cb_setPage();
     //}
 }

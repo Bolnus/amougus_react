@@ -1,5 +1,6 @@
 import classes from './main-menu.module.css';
 import {NavLink, useNavigate} from "react-router-dom";
+import {clearRecordActionCreator} from "../../redux/state";
 
 function MainMenu(props)
 {
@@ -8,7 +9,7 @@ function MainMenu(props)
     {
         event.preventDefault();
         //console.log("writeRec");
-        props.dispatch({type: "CLEAR-RECORD"});
+        props.dispatch(clearRecordActionCreator());
         navigate("/");
     }
     //<NavLink to="/" >

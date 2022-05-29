@@ -1,4 +1,8 @@
 //import {rerenderEntireTree} from "../render.jsx";
+const PREPARE_RECORD="PREPARE-RECORD"
+const WRITE_RECORD="WRITE-RECORD"
+const CLEAR_RECORD="CLEAR-RECORD"
+const UPDATE_NEW_RECORD_NAME="UPDATE-NEW-RECORD-NAME"
 
 let rerenderEntireTree;
 let maxRecords = 5;
@@ -77,7 +81,7 @@ let store = {
     {
         switch(action.type)
         {
-            case "PREPARE-RECORD":
+            case PREPARE_RECORD:
                 let date = new Date();
                 let currentTime = date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
                 let month = date.getMonth()+1;
@@ -96,7 +100,7 @@ let store = {
                 this._state.newRecord = newNewRecord;
                 rerenderEntireTree(this);
                 break;
-            case "WRITE-RECORD":
+            case WRITE_RECORD:
                 if(this._state.newRecord.hasOwnProperty("result"))
                 {
                     this._state.newRecord.place = this._getPlace(this._state.newRecord.result);
@@ -114,11 +118,11 @@ let store = {
                     }
                 }
                 break;
-            case "CLEAR-RECORD":
+            case CLEAR_RECORD:
                 this._state.newRecord = {};
                 rerenderEntireTree(this);
                 break;
-            case "UPDATE-NEW-RECORD-NAME":
+            case UPDATE_NEW_RECORD_NAME:
                 this._state.newRecord.name=action.newName;
                 rerenderEntireTree(this);
                 break;
@@ -128,6 +132,35 @@ let store = {
     }
 }
 
+export function prepareRecordActionCreator(result)
+{
+    return {
+        type: PREPARE_RECORD,
+        result: result
+    };
+}
+
+export function writeRecordActionCreator()
+{
+    return {
+        type: WRITE_RECORD,
+    };
+}
+
+export function clearRecordActionCreator()
+{
+    return {
+        type: CLEAR_RECORD,
+    };
+}
+
+export function updateNewRecordNameActionCreator(newName)
+{
+    return {
+        type: UPDATE_NEW_RECORD_NAME,
+        newName: newName
+    };
+}
 
 window.store=store;
 
