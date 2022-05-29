@@ -16,30 +16,30 @@ function Contents(props)
     //debugger;
     const [state, setState] = useState("start");
     console.log("contents");
-    //console.log(props.store.state().newRecord);
+    //console.log(props.state.newRecord);
     // function setPageName(pageName)
     // {
     //     return function() {setState(pageName)};
     // }
-    if(props.store.state().newRecord.hasOwnProperty("name")) //state==="name"
+    if(props.state.newRecord.hasOwnProperty("name")) //state==="name"
     {
         return(
             <div className={`${classes.contents} ${classes.contents_geometry} block`}>
                 <Routes>
-                    <Route path="/" element={<Name newRecord={props.store.state().newRecord} setPage={function() { setState("start")}} updateNewRecordName={props.store.updateNewRecordName.bind(props.store)} writeRecord={props.store.writeRecord.bind(props.store)}/>}/>
-                    <Route path="/records" element={<Records records={props.store.state().recordsData} newRecord={props.store.state().newRecord} clearRecord={props.store.clearRecord.bind(props.store)} setPage={function() { setState("start")}} />} />
+                    <Route path="/" element={<Name newRecord={props.state.newRecord} setPage={function() { setState("start")}} dispatch={props.dispatch}/>}/>
+                    <Route path="/records" element={<Records records={props.state.recordsData} newRecord={props.state.newRecord} dispatch={props.dispatch} setPage={function() { setState("start")}} />} />
                     <Route path="/about" element={<About setPage={function() { setState("start")}} /> }/>
                 </Routes>
             </div>
         );
     }
-    else if(props.store.state().newRecord.hasOwnProperty("result"))
+    else if(props.state.newRecord.hasOwnProperty("result"))
     {
         return(
             <div className={`${classes.contents} ${classes.contents_geometry} block`}>
                 <Routes>
-                    <Route path="/" element={<Result  setPage={function() { setState("start")}} newRecord={props.store.state().newRecord} clearRecord={props.store.clearRecord.bind(props.store)} />}/>
-                    <Route path="/records" element={<Records records={props.store.state().recordsData} newRecord={props.store.state().newRecord} clearRecord={props.store.clearRecord.bind(props.store)} setPage={function() { setState("start")}} />} />
+                    <Route path="/" element={<Result  setPage={function() { setState("start")}} newRecord={props.state.newRecord} dispatch={props.dispatch} />}/>
+                    <Route path="/records" element={<Records records={props.state.recordsData} newRecord={props.state.newRecord} dispatch={props.dispatch} setPage={function() { setState("start")}} />} />
                     <Route path="/about" element={<About setPage={function() { setState("start")}} /> }/>
                 </Routes>
             </div>
@@ -50,8 +50,8 @@ function Contents(props)
         return(
             <div className={`${classes.contents} ${classes.contents_geometry} block`}>
                 <Routes>
-                    <Route path="/" element={<Game setPage={function() { setState("name")}} prepareRecord={props.store.prepareRecord.bind(props.store)}/>}/>
-                    <Route path="/records" element={<Records records={props.store.state().recordsData} newRecord={props.store.state().newRecord} clearRecord={props.store.clearRecord.bind(props.store)} setPage={function() { setState("start")}} />} />
+                    <Route path="/" element={<Game setPage={function() { setState("name")}} dispatch={props.dispatch}/>}/>
+                    <Route path="/records" element={<Records records={props.state.recordsData} newRecord={props.state.newRecord} dispatch={props.dispatch} setPage={function() { setState("start")}} />} />
                     <Route path="/about" element={<About setPage={function() { setState("start")}} /> }/>
                 </Routes>
             </div>
@@ -64,7 +64,7 @@ function Contents(props)
             <div className={`${classes.contents} ${classes.contents_geometry} block`}>
                 <Routes>
                     <Route path="/" element={<Start  setPage={function() { setState("game")}} />}/>
-                    <Route path="/records" element={<Records records={props.store.state().recordsData} newRecord={props.store.state().newRecord} clearRecord={props.store.clearRecord.bind(props.store)} setPage={function() { setState("start")}} />} />
+                    <Route path="/records" element={<Records records={props.state.recordsData} newRecord={props.state.newRecord} dispatch={props.dispatch} setPage={function() { setState("start")}} />} />
                     <Route path="/about" element={<About setPage={function() { setState("start")}} /> }/>
                 </Routes>
             </div>

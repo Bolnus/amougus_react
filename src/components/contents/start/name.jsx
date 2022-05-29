@@ -10,8 +10,8 @@ let letters = [];
 let namePage__letter = [];
 let alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'];
 let nameStr;
-let cb_updateName;
-let cb_writeRec;
+//let cb_updateName;
+let dispatch;
 let count = -1;
 
 for(let i=0;i<3;i++)
@@ -38,7 +38,8 @@ function on_pbUp_clicked(number)
         else
             nameStr1[number]=alphabet[currentLetterNumber]; //namePage__letter[number].current.innerHTML
         //console.log(nameStr1.join(''));
-        cb_updateName(nameStr1.join(''));//
+        dispatch({type: "UPDATE-NEW-RECORD-NAME",newName: nameStr1.join('')});
+        //cb_updateName(nameStr1.join(''));//
     }
 
 }
@@ -57,7 +58,8 @@ function on_pbDown_clicked(number)
             nameStr1[number]=alphabet[alphabet.length-1]; //namePage__letter[number].current.innerHTML
         else
             nameStr1[number]=alphabet[currentLetterNumber]; //namePage__letter[number].current.innerHTML
-        cb_updateName(nameStr1.join(''));
+        //cb_updateName(nameStr1.join(''));
+        dispatch({type: "UPDATE-NEW-RECORD-NAME",newName: nameStr1.join('')});
     }
 }
 
@@ -95,8 +97,8 @@ function Name(props)
 {
     nameStr=props.newRecord.name;
     //console.log("props name:"+nameStr);
-    cb_updateName=props.updateNewRecordName;
-    cb_writeRec=props.writeRecord;
+    dispatch=props.dispatch;
+    //cb_updateName=props.updateNewRecordName;
     // clearName();
     let lettersArray = [];
     for(let i=0;i<props.newRecord.name.length;i++)
@@ -109,7 +111,7 @@ function Name(props)
     {
         event.preventDefault();
         console.log("writeRec");
-        props.writeRecord();
+        props.dispatch({type: "WRITE-RECORD"});
 
         navigate("/records");
         //props.setPage();

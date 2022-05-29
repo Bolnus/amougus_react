@@ -3,21 +3,24 @@ import classes from "./start.module.css";
 import React from "react";
 
 let cb_setPage;
-let cb_clearRecord;
+//let cb_clearRecord;
+let dispatch;
 
 function pushButton_close_clicked()
 {
     // return function()
     // {
-        cb_clearRecord();
-        cb_setPage();
+        //cb_clearRecord();
+    dispatch({type: "CLEAR-RECORD"});
+    cb_setPage();
     //}
 }
 
 function Result(props)
 {
     cb_setPage=props.setPage;
-    cb_clearRecord=props.clearRecord;
+    dispatch=props.dispatch;
+    //cb_clearRecord=props.clearRecord;
     return(
         <div className={`${classes.resultPage} page block`}>
             <div className={`${classes.resultWindow} block`}>

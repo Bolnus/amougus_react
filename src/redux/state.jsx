@@ -41,15 +41,7 @@ let store = {
         }
         //subPage: "start"
     },
-    state()
-    {
-        return this._state;
-    },
-    subscribe(observer)
-    {
-        rerenderEntireTree=observer;
-    },
-    getPlace(resultValue)
+    _getPlace(resultValue)
     {
         //let inserted=0;
         let intResult = parseInt(resultValue.replace(/-/g,''),10);
@@ -73,57 +65,67 @@ let store = {
         }
         return this._state.recordsData.length;
     },
-    prepareRecord(result)
+    state()
     {
-        let date = new Date();
-        let currentTime = date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
-        let month = date.getMonth()+1;
-        let currentDate = date.getDate()+'.'+month+'.'+date.getFullYear();
-        let newNewRecord = {
-            "date": currentDate,
-            "time": currentTime,
-            "result": result
-        }
-        let placeNumber = this.getPlace(result);
-        if(placeNumber<maxRecords)
-        {
-            newNewRecord.place=placeNumber;
-            newNewRecord.name = "AAA";
-        }
-        this._state.newRecord = newNewRecord;
-        rerenderEntireTree(this);
-        //return 1;
+        return this._state;
     },
-    writeRecord()
+    subscribe(observer)
     {
-        if(this._state.newRecord.hasOwnProperty("result"))
+        rerenderEntireTree=observer;
+    },
+    dispatch(action)
+    {
+        switch(action.type)
         {
-            this._state.newRecord.place = this.getPlace(this._state.newRecord.result);
-            if (this._state.newRecord.place < maxRecords)
-            {
+            case "PREPARE-RECORD":
+                let date = new Date();
+                let currentTime = date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
+                let month = date.getMonth()+1;
+                let currentDate = date.getDate()+'.'+month+'.'+date.getFullYear();
                 let newNewRecord = {
-                    "name": this._state.newRecord.name,
-                    "date": this._state.newRecord.date,
-                    "time": this._state.newRecord.time,
-                    "result": this._state.newRecord.result
+                    "date": currentDate,
+                    "time": currentTime,
+                    "result": action.result
                 }
-                this._state.recordsData.splice(this._state.newRecord.place, 0, newNewRecord);
-                if (this._state.recordsData.length > maxRecords)
-                    this._state.recordsData.pop();
-            }
+                let placeNumber = this._getPlace(action.result);
+                if(placeNumber<maxRecords)
+                {
+                    newNewRecord.place=placeNumber;
+                    newNewRecord.name = "AAA";
+                }
+                this._state.newRecord = newNewRecord;
+                rerenderEntireTree(this);
+                break;
+            case "WRITE-RECORD":
+                if(this._state.newRecord.hasOwnProperty("result"))
+                {
+                    this._state.newRecord.place = this._getPlace(this._state.newRecord.result);
+                    if (this._state.newRecord.place < maxRecords)
+                    {
+                        let newNewRecord = {
+                            "name": this._state.newRecord.name,
+                            "date": this._state.newRecord.date,
+                            "time": this._state.newRecord.time,
+                            "result": this._state.newRecord.result
+                        }
+                        this._state.recordsData.splice(this._state.newRecord.place, 0, newNewRecord);
+                        if (this._state.recordsData.length > maxRecords)
+                            this._state.recordsData.pop();
+                    }
+                }
+                break;
+            case "CLEAR-RECORD":
+                this._state.newRecord = {};
+                rerenderEntireTree(this);
+                break;
+            case "UPDATE-NEW-RECORD-NAME":
+                this._state.newRecord.name=action.newName;
+                rerenderEntireTree(this);
+                break;
+            default:
+                console.log("No such action type: "+action.type);
         }
-    },
-    clearRecord()
-    {
-        this._state.newRecord = {};
-        rerenderEntireTree(this);
-    },
-    updateNewRecordName(newName)
-    {
-        this._state.newRecord.name=newName;
-        rerenderEntireTree(this);
     }
-
 }
 
 

@@ -1,19 +1,15 @@
-import store from "./redux/state.jsx";
 import React from 'react';
 import ReactDOM from 'react-dom';
 
 import './main.css';
 
+import store from "./redux/state.jsx";
 import Header from './components/header/header.jsx';
 import MainMenu from './components/main_menu/main-menu.jsx'; //./components/main_menu/main-menu.jsx
 import Contents from './components/contents/contents.jsx';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
-import {prepareRecord} from "./redux/state.jsx";
-import {writeRecord} from "./redux/state.jsx";
-import {updateNewRecordName} from "./redux/state.jsx";
-import {clearRecord} from "./redux/state.jsx"
-import {subscribe} from "./redux/state.jsx"
+
 
 function rerenderEntireTree(currentStore)
 {
@@ -21,8 +17,8 @@ function rerenderEntireTree(currentStore)
         <React.StrictMode>
             <BrowserRouter>
                 <Header/>
-                <MainMenu clearRecord={currentStore.clearRecord.bind(currentStore)}/>
-                <Contents store={currentStore}/>
+                <MainMenu dispatch={currentStore.dispatch.bind(currentStore)}/>
+                <Contents state={currentStore.state()} dispatch={currentStore.dispatch.bind(currentStore)}/>
             </ BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')

@@ -8,8 +8,9 @@ let buttons2 = [];
 let chainCount = 0;
 let fastTimer;
 let gamePage__timer = React.createRef();
-let cbSetPage;
-let cb_setRecord;
+let cb_SetPage;
+//let cb_setRecord;
+let dispatch;
 
 function on_pb_clicked(buttonNumber)
 {
@@ -147,9 +148,9 @@ function userSucceeded()
     }
     //console.log(gamePage__timer.current.innerHTML);
     chainCount=0;
-    cb_setRecord(gamePage__timer.current.innerHTML.replace(/:/g,'-'));
+    dispatch({type: "PREPARE-RECORD", result: gamePage__timer.current.innerHTML.replace(/:/g,'-')});
     // if(!writeResult)
-    cbSetPage();
+    cb_SetPage();
 
     //let endTime = document.querySelector("#timer").innerHTML;
     //showResult(endTime);
@@ -158,8 +159,8 @@ function userSucceeded()
 
 function Game(props)
 {
-    cbSetPage=props.setPage;
-    cb_setRecord=props.prepareRecord;
+    cb_SetPage=props.setPage;
+    dispatch=props.dispatch;
     clearTimeout(fastTimer);
     createButtons();
     chainCount=0;

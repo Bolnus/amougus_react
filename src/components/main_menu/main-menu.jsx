@@ -8,7 +8,7 @@ function MainMenu(props)
     {
         event.preventDefault();
         //console.log("writeRec");
-        props.clearRecord();
+        props.dispatch({type: "CLEAR-RECORD"});
         navigate("/");
     }
     //<NavLink to="/" >
