@@ -1,9 +1,8 @@
 import classes from './start.module.css';
 import React from "react";
-import {useEffect} from "react";
-import {Link, NavLink} from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import {updateNewRecordNameActionCreator, writeRecordActionCreator} from "../../../redux/state";
+import {updateNewRecordNameActionCreator} from "../../../redux/newrecord-reducer.js";
+import {writeRecordActionCreator} from "../../../redux/records-reducer.js";
 
 let buttonUps = [];
 let buttonDowns = [];

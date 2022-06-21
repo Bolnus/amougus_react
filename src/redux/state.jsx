@@ -1,8 +1,5 @@
-//import {rerenderEntireTree} from "../render.jsx";
-const PREPARE_RECORD="PREPARE-RECORD"
-const WRITE_RECORD="WRITE-RECORD"
-const CLEAR_RECORD="CLEAR-RECORD"
-const UPDATE_NEW_RECORD_NAME="UPDATE-NEW-RECORD-NAME"
+import {recordsReducer} from "./records-reducer";
+import {newRecordReducer} from "./newrecord-reducer";
 
 let rerenderEntireTree;
 let maxRecords = 5;
@@ -79,88 +76,78 @@ let store = {
     },
     dispatch(action)
     {
-        switch(action.type)
+        let actionDispatchedFlag = 0;
+        let reducerResult = 0;
+        reducerResult = recordsReducer(this._state,action);
+        if(reducerResult)
         {
-            case PREPARE_RECORD:
-                let date = new Date();
-                let currentTime = date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
-                let month = date.getMonth()+1;
-                let currentDate = date.getDate()+'.'+month+'.'+date.getFullYear();
-                let newNewRecord = {
-                    "date": currentDate,
-                    "time": currentTime,
-                    "result": action.result
-                }
-                let placeNumber = this._getPlace(action.result);
-                if(placeNumber<maxRecords)
-                {
-                    newNewRecord.place=placeNumber;
-                    newNewRecord.name = "AAA";
-                }
-                this._state.newRecord = newNewRecord;
-                rerenderEntireTree(this);
-                break;
-            case WRITE_RECORD:
-                if(this._state.newRecord.hasOwnProperty("result"))
-                {
-                    this._state.newRecord.place = this._getPlace(this._state.newRecord.result);
-                    if (this._state.newRecord.place < maxRecords)
-                    {
-                        let newNewRecord = {
-                            "name": this._state.newRecord.name,
-                            "date": this._state.newRecord.date,
-                            "time": this._state.newRecord.time,
-                            "result": this._state.newRecord.result
-                        }
-                        this._state.recordsData.splice(this._state.newRecord.place, 0, newNewRecord);
-                        if (this._state.recordsData.length > maxRecords)
-                            this._state.recordsData.pop();
-                    }
-                }
-                break;
-            case CLEAR_RECORD:
-                this._state.newRecord = {};
-                rerenderEntireTree(this);
-                break;
-            case UPDATE_NEW_RECORD_NAME:
-                this._state.newRecord.name=action.newName;
-                rerenderEntireTree(this);
-                break;
-            default:
-                console.log("No such action type: "+action.type);
+            actionDispatchedFlag=1;
+            this._state = reducerResult;
         }
+        reducerResult = newRecordReducer(this._state,action);
+        if(reducerResult)
+        {
+            actionDispatchedFlag = 1;
+            this._state.newRecord = reducerResult;
+            rerenderEntireTree(this);
+        }
+        if(!actionDispatchedFlag)
+            console.log("No such action type: "+action.type);
+
+        // switch(action.type)
+        // {
+        //     case PREPARE_RECORD:
+        //         let date = new Date();
+        //         let currentTime = date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
+        //         let month = date.getMonth()+1;
+        //         let currentDate = date.getDate()+'.'+month+'.'+date.getFullYear();
+        //         let newNewRecord = {
+        //             "date": currentDate,
+        //             "time": currentTime,
+        //             "result": action.result
+        //         }
+        //         let placeNumber = this._getPlace(action.result);
+        //         if(placeNumber<maxRecords)
+        //         {
+        //             newNewRecord.place=placeNumber;
+        //             newNewRecord.name = "AAA";
+        //         }
+        //         this._state.newRecord = newNewRecord;
+        //         rerenderEntireTree(this);
+        //         break;
+        //     case WRITE_RECORD:
+        //         if(this._state.newRecord.hasOwnProperty("result"))
+        //         {
+        //             this._state.newRecord.place = this._getPlace(this._state.newRecord.result);
+        //             if (this._state.newRecord.place < maxRecords)
+        //             {
+        //                 let newNewRecord = {
+        //                     "name": this._state.newRecord.name,
+        //                     "date": this._state.newRecord.date,
+        //                     "time": this._state.newRecord.time,
+        //                     "result": this._state.newRecord.result
+        //                 }
+        //                 this._state.recordsData.splice(this._state.newRecord.place, 0, newNewRecord);
+        //                 if (this._state.recordsData.length > maxRecords)
+        //                     this._state.recordsData.pop();
+        //             }
+        //         }
+        //         break;
+        //     case CLEAR_RECORD:
+        //         this._state.newRecord = {};
+        //         rerenderEntireTree(this);
+        //         break;
+        //     case UPDATE_NEW_RECORD_NAME:
+        //         this._state.newRecord.name=action.newName;
+        //         rerenderEntireTree(this);
+        //         break;
+        //     default:
+        //         console.log("No such action type: "+action.type);
+        // }
     }
 }
 
-export function prepareRecordActionCreator(result)
-{
-    return {
-        type: PREPARE_RECORD,
-        result: result
-    };
-}
 
-export function writeRecordActionCreator()
-{
-    return {
-        type: WRITE_RECORD,
-    };
-}
-
-export function clearRecordActionCreator()
-{
-    return {
-        type: CLEAR_RECORD,
-    };
-}
-
-export function updateNewRecordNameActionCreator(newName)
-{
-    return {
-        type: UPDATE_NEW_RECORD_NAME,
-        newName: newName
-    };
-}
 
 window.store=store;
 

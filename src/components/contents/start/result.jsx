@@ -1,7 +1,7 @@
-import {useNavigate} from "react-router-dom";
+
 import classes from "./start.module.css";
 import React from "react";
-import {clearRecordActionCreator} from "../../../redux/state";
+import {clearRecordActionCreator} from "../../../redux/newrecord-reducer.js";
 
 let cb_setPage;
 //let cb_clearRecord;

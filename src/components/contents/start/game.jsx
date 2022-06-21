@@ -1,7 +1,7 @@
 import classes from './start.module.css';
 
 import React from "react";
-import {prepareRecordActionCreator} from "../../../redux/state";
+import {prepareRecordActionCreator} from "../../../redux/newrecord-reducer.js";
 
 let gamePage__pushButton = [];
 let buttons1 = [];
@@ -21,7 +21,7 @@ function on_pb_clicked(buttonNumber)
         if(gamePage__pushButton[buttonNumber].current.innerHTML==chainCount)
         {
             gamePage__pushButton[buttonNumber].current.style.background = 'blue';
-            if(chainCount==10)
+            if(chainCount===10)
             {
                 for(let i=0;i<gamePage__pushButton.length;i++)
                 {
@@ -82,10 +82,10 @@ function stopWatch()
     let minutes = oldTime[0];
     let seconds = oldTime[1];
     let milliseconds = oldTime[2];
-    if(milliseconds=="995")
+    if(milliseconds==="995")
     {
         milliseconds="000";
-        if(seconds=="59")
+        if(seconds==="59")
         {
             seconds="00";
             let intMinutes = parseInt(minutes);
@@ -123,9 +123,9 @@ function userFailed(count)
             {
                 const pb = gamePage__pushButton[i].current;
                 pb.style.background = 'grey';
-                if(count==0)
+                if(count===0)
                     pb.disabled = 1;
-                else if(count==4)
+                else if(count===4)
                     pb.disabled = 0;
             }
             break;
@@ -134,6 +134,8 @@ function userFailed(count)
             for(let i=0;i<gamePage__pushButton.length;i++)
                 gamePage__pushButton[i].current.style.background = 'red';
             break;
+        default:
+            console.log("Wrong count value");
     }
     count++;
     if(count<5)
