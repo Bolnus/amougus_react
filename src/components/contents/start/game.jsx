@@ -1,7 +1,7 @@
 import classes from './start.module.css';
 
 import React from "react";
-import {prepareRecordActionCreator} from "../../../redux/newrecord-reducer.js";
+import {prepareRecordActionCreator} from "../../../redux/records-reducer.js";
 
 let gamePage__pushButton = [];
 let buttons1 = [];

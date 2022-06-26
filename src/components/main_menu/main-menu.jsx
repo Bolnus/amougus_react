@@ -1,6 +1,6 @@
 import classes from './main-menu.module.css';
 import {NavLink, useNavigate} from "react-router-dom";
-import {clearRecordActionCreator} from "../../redux/newrecord-reducer.js";
+import {clearRecordActionCreator} from "../../redux/records-reducer.js";
 
 function MainMenu(props)
 {

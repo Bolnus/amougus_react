@@ -6,41 +6,42 @@ let maxRecords = 5;
 
 let store = {
     _state: {
-        recordsData: [
-            {
-                "name": "AAA",
-                "date": "5.1.2022",
-                "time": "17:17:58",
-                "result": "00-06-120"
-            },
-            {
-                "name": "AAA",
-                "date": "5.1.2022",
-                "time": "17:17:58",
-                "result": "00-06-144"
-            },
-            {
-                "name": "AAA",
-                "date": "6.1.2022",
-                "time": "18:44:39",
-                "result": "00-06-310"
-            },
-            {
-                "name": "AAA",
-                "date": "6.1.2022",
-                "time": "18:47:29",
-                "result": "00-06-410"
-            },
-            {
-                "name": "AAA",
-                "date": "6.1.2022",
-                "time": "18:58:1",
-                "result": "00-08-805"
-            }],
-        newRecord: {
+        records: {
+            recordsData: [
+                {
+                    "name": "AAA",
+                    "date": "5.1.2022",
+                    "time": "17:17:58",
+                    "result": "00-06-120"
+                },
+                {
+                    "name": "AAA",
+                    "date": "5.1.2022",
+                    "time": "17:17:58",
+                    "result": "00-06-144"
+                },
+                {
+                    "name": "AAA",
+                    "date": "6.1.2022",
+                    "time": "18:44:39",
+                    "result": "00-06-310"
+                },
+                {
+                    "name": "AAA",
+                    "date": "6.1.2022",
+                    "time": "18:47:29",
+                    "result": "00-06-410"
+                },
+                {
+                    "name": "AAA",
+                    "date": "6.1.2022",
+                    "time": "18:58:1",
+                    "result": "00-08-805"
+                }],
+            newRecord: {
 
+            }
         }
-        //subPage: "start"
     },
     _getPlace(resultValue)
     {
@@ -83,13 +84,14 @@ let store = {
         {
             actionDispatchedFlag=1;
             this._state = reducerResult;
+            rerenderEntireTree(this._state);
         }
         reducerResult = newRecordReducer(this._state,action);
         if(reducerResult)
         {
             actionDispatchedFlag = 1;
             this._state.newRecord = reducerResult;
-            rerenderEntireTree(this);
+            rerenderEntireTree(this._state);
         }
         if(!actionDispatchedFlag)
             console.log("No such action type: "+action.type);

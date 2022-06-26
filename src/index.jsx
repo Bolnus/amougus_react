@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import './main.css';
 
-import store from "./redux/state.jsx";
+import store from "./redux/redux-store.js"; //
 import Header from './components/header/header.jsx';
 import MainMenu from './components/main_menu/main-menu.jsx'; //./components/main_menu/main-menu.jsx
 import Contents from './components/contents/contents.jsx';
@@ -11,22 +11,29 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 
 
-function rerenderEntireTree(currentStore)
+function rerenderEntireTree(currentState)
 {
     return ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
                 <Header/>
-                <MainMenu dispatch={currentStore.dispatch.bind(currentStore)}/>
-                <Contents state={currentStore.state()} dispatch={currentStore.dispatch.bind(currentStore)}/>
+                <MainMenu dispatch={store.dispatch.bind(store)}/>
+                <Contents state={currentState.records} dispatch={store.dispatch.bind(store)}/>
             </ BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')
     );
 }
 
-rerenderEntireTree(store);
-store.subscribe(rerenderEntireTree);
+function rerenderStore()
+{
+    let state = store.getState();
+
+    rerenderEntireTree(state);
+}
+
+rerenderEntireTree(store.getState());
+store.subscribe(rerenderStore);
 
 
 

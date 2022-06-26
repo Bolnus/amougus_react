@@ -1,7 +1,7 @@
 import classes from './start.module.css';
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import {updateNewRecordNameActionCreator} from "../../../redux/newrecord-reducer.js";
+import {updateNewRecordNameActionCreator} from "../../../redux/records-reducer.js";
 import {writeRecordActionCreator} from "../../../redux/records-reducer.js";
 
 let buttonUps = [];

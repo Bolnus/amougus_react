@@ -29,6 +29,10 @@ export function updateNewRecordNameActionCreator(newName)
     };
 }
 
+let initialState = {
+
+}
+
 export function newRecordReducer(state, action)
 {
     switch(action.type)

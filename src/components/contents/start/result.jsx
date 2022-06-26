@@ -1,7 +1,7 @@
 
 import classes from "./start.module.css";
 import React from "react";
-import {clearRecordActionCreator} from "../../../redux/newrecord-reducer.js";
+import {clearRecordActionCreator} from "../../../redux/records-reducer.js";
 
 let cb_setPage;
 //let cb_clearRecord;
