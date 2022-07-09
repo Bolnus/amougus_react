@@ -1,15 +1,13 @@
-
 import About from "./about/about.jsx"
 import Start from "./start/start.jsx"
-import Name from "./start/name.jsx"
-import Game from "./start/game.jsx"
-import Result from "./start/result";
 import classes from "./contents.module.css";
-import Records from "./records/records.jsx";
 import {Route, Routes} from "react-router-dom";
-//import {BrowserRouter} from "react-router-dom";
 import React from "react";
 import { useState } from "react"
+import RecordsContainer from "./records/recordsContainer.jsx";
+import GameContainer from "./start/gameContainer";
+import ResultContainer from "./start/resultContainer";
+import NameContainer from "./start/nameContainer";
 
 function Contents(props)
 {
@@ -26,8 +24,8 @@ function Contents(props)
         return(
             <div className={`${classes.contents} ${classes.contents_geometry} block`}>
                 <Routes>
-                    <Route path="/" element={<Name newRecord={props.state.newRecord} setPage={function() { setState("start")}} dispatch={props.dispatch}/>}/>
-                    <Route path="/records" element={<Records records={props.state.recordsData} newRecord={props.state.newRecord} dispatch={props.dispatch} setPage={function() { setState("start")}} />} />
+                    <Route path="/" element={<NameContainer store={props.store} setPage={function() { setState("start")}}/>}/>
+                    <Route path="/records" element={<RecordsContainer store={props.store} setPage={function() { setState("start")}} />} />
                     <Route path="/about" element={<About setPage={function() { setState("start")}} /> }/>
                 </Routes>
             </div>
@@ -38,8 +36,8 @@ function Contents(props)
         return(
             <div className={`${classes.contents} ${classes.contents_geometry} block`}>
                 <Routes>
-                    <Route path="/" element={<Result  setPage={function() { setState("start")}} newRecord={props.state.newRecord} dispatch={props.dispatch} />}/>
-                    <Route path="/records" element={<Records records={props.state.recordsData} newRecord={props.state.newRecord} dispatch={props.dispatch} setPage={function() { setState("start")}} />} />
+                    <Route path="/" element={<ResultContainer  setPage={function() { setState("start")}} store={props.store} />}/>
+                    <Route path="/records" element={<RecordsContainer store={props.store} setPage={function() { setState("start")}} />} />
                     <Route path="/about" element={<About setPage={function() { setState("start")}} /> }/>
                 </Routes>
             </div>
@@ -50,8 +48,8 @@ function Contents(props)
         return(
             <div className={`${classes.contents} ${classes.contents_geometry} block`}>
                 <Routes>
-                    <Route path="/" element={<Game setPage={function() { setState("name")}} dispatch={props.dispatch}/>}/>
-                    <Route path="/records" element={<Records records={props.state.recordsData} newRecord={props.state.newRecord} dispatch={props.dispatch} setPage={function() { setState("start")}} />} />
+                    <Route path="/" element={<GameContainer setPage={function() { setState("name")}} store={props.store}/>}/>
+                    <Route path="/records" element={<RecordsContainer store={props.store} setPage={function() { setState("start")}} />} />
                     <Route path="/about" element={<About setPage={function() { setState("start")}} /> }/>
                 </Routes>
             </div>
@@ -64,7 +62,7 @@ function Contents(props)
             <div className={`${classes.contents} ${classes.contents_geometry} block`}>
                 <Routes>
                     <Route path="/" element={<Start  setPage={function() { setState("game")}} />}/>
-                    <Route path="/records" element={<Records records={props.state.recordsData} newRecord={props.state.newRecord} dispatch={props.dispatch} setPage={function() { setState("start")}} />} />
+                    <Route path="/records" element={<RecordsContainer store={props.store} setPage={function() { setState("start")}} />} />
                     <Route path="/about" element={<About setPage={function() { setState("start")}} /> }/>
                 </Routes>
             </div>

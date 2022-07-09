@@ -1,3 +1,7 @@
+//
+// LEGACY PRIMITIVE REDUX
+//
+
 import {recordsReducer} from "./records-reducer";
 import {newRecordReducer} from "./newrecord-reducer";
 

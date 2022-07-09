@@ -9,7 +9,7 @@ function MainMenu(props)
     {
         event.preventDefault();
         //console.log("writeRec");
-        props.dispatch(clearRecordActionCreator());
+        props.clearRecord(); //.dispatch(clearRecordActionCreator());
         navigate("/");
     }
     //<NavLink to="/" >

@@ -1,17 +1,14 @@
 import classes from './start.module.css';
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import {updateNewRecordNameActionCreator} from "../../../redux/records-reducer.js";
-import {writeRecordActionCreator} from "../../../redux/records-reducer.js";
 
 let buttonUps = [];
 let buttonDowns = [];
-let letters = [];
+//let letters = [];
 let namePage__letter = [];
 let alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'];
 let nameStr;
-//let cb_updateName;
-let dispatch;
+let cb_updateName;
 let count = -1;
 
 for(let i=0;i<3;i++)
@@ -38,7 +35,7 @@ function on_pbUp_clicked(number)
         else
             nameStr1[number]=alphabet[currentLetterNumber]; //namePage__letter[number].current.innerHTML
         //console.log(nameStr1.join(''));
-        dispatch(updateNewRecordNameActionCreator(nameStr1.join('')));
+        cb_updateName(nameStr1.join(''));
         //cb_updateName(nameStr1.join(''));//
     }
 
@@ -59,22 +56,22 @@ function on_pbDown_clicked(number)
         else
             nameStr1[number]=alphabet[currentLetterNumber]; //namePage__letter[number].current.innerHTML
         //cb_updateName(nameStr1.join(''));
-        dispatch(updateNewRecordNameActionCreator(nameStr1.join('')));
+        cb_updateName(nameStr1.join(''));
     }
 }
 
-function clearName()
-{
-    for(let i=0;i<3;i++)
-    {
-
-        buttonUps[i]=<button className={classes.namePage__pushButton} onClick={on_pbUp_clicked(i)} key={i}>▲</button>;
-        buttonDowns[i]=<button className={classes.namePage__pushButton} onClick={on_pbDown_clicked(i)} key={i}>▼</button>;
-        letters[i]=<div className={classes.namePage__letterArea} key={i}>
-            <p className={classes.namePage__letter} ref={namePage__letter[i]} key={i}>{nameStr[i]}</p>
-        </div>;
-    }
-}
+// function clearName()
+// {
+//     for(let i=0;i<3;i++)
+//     {
+//
+//         buttonUps[i]=<button className={classes.namePage__pushButton} onClick={on_pbUp_clicked(i)} key={i}>▲</button>;
+//         buttonDowns[i]=<button className={classes.namePage__pushButton} onClick={on_pbDown_clicked(i)} key={i}>▼</button>;
+//         letters[i]=<div className={classes.namePage__letterArea} key={i}>
+//             <p className={classes.namePage__letter} ref={namePage__letter[i]} key={i}>{nameStr[i]}</p>
+//         </div>;
+//     }
+// }
 
 function tagsGetter(newRec)
 {
@@ -97,7 +94,7 @@ function Name(props)
 {
     nameStr=props.newRecord.name;
     //console.log("props name:"+nameStr);
-    dispatch=props.dispatch;
+    cb_updateName=props.updateNewRecordName;
     //cb_updateName=props.updateNewRecordName;
     // clearName();
     let lettersArray = [];
@@ -111,7 +108,7 @@ function Name(props)
     {
         event.preventDefault();
         console.log("writeRec");
-        props.dispatch(writeRecordActionCreator());
+        props.writeRecord();
 
         navigate("/records");
         //props.setPage();

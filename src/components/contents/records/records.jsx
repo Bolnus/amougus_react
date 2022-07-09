@@ -19,7 +19,7 @@ function Records(props)
     }
     props.setPage();
     count = 0;
-    let recordsComponents = props.records.map(componentGetter);
+    let recordsComponents = props.recordsData.map(componentGetter);
     //console.log(recordsComponents[0]);
     // let recordsComponents = recordsData.map(function(recordEl,index)
     // {

@@ -1,3 +1,7 @@
+//
+// LEGACY PRIMITIVE REDUX
+//
+
 import {getPlace} from "./place-getter";
 
 const PREPARE_RECORD="PREPARE-RECORD";

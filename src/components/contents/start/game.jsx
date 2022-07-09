@@ -1,7 +1,6 @@
 import classes from './start.module.css';
 
 import React from "react";
-import {prepareRecordActionCreator} from "../../../redux/records-reducer.js";
 
 let gamePage__pushButton = [];
 let buttons1 = [];
@@ -11,7 +10,7 @@ let fastTimer;
 let gamePage__timer = React.createRef();
 let cb_SetPage;
 //let cb_setRecord;
-let dispatch;
+let cb_prepareRecord;
 
 function on_pb_clicked(buttonNumber)
 {
@@ -151,7 +150,7 @@ function userSucceeded()
     }
     //console.log(gamePage__timer.current.innerHTML);
     chainCount=0;
-    dispatch(prepareRecordActionCreator(gamePage__timer.current.innerHTML.replace(/:/g,'-')));
+    cb_prepareRecord(gamePage__timer.current.innerHTML.replace(/:/g,'-'));
     // if(!writeResult)
     cb_SetPage();
 
@@ -163,7 +162,7 @@ function userSucceeded()
 function Game(props)
 {
     cb_SetPage=props.setPage;
-    dispatch=props.dispatch;
+    cb_prepareRecord=props.prepareRecord;
     clearTimeout(fastTimer);
     createButtons();
     chainCount=0;

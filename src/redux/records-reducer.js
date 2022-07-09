@@ -106,7 +106,7 @@ export function recordsReducer(state=initialState, action)
                     "date": currentDate,
                     "time": currentTime,
                     "result": action.result
-                }
+                };
                 let placeNumber = getPlace(state, action.result);
                 if(placeNumber<maxRecords)
                 {

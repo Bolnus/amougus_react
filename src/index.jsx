@@ -5,7 +5,7 @@ import './main.css';
 
 import store from "./redux/redux-store.js"; //
 import Header from './components/header/header.jsx';
-import MainMenu from './components/main_menu/main-menu.jsx'; //./components/main_menu/main-menu.jsx
+import MainMenuContainer from './components/main_menu/mainMenuContainer.jsx'; //./components/main_menu/main-menu.jsx
 import Contents from './components/contents/contents.jsx';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
@@ -13,12 +13,13 @@ import {BrowserRouter} from "react-router-dom";
 
 function rerenderEntireTree(currentState)
 {
+    //dispatch={store.dispatch.bind(store)}
     return ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
                 <Header/>
-                <MainMenu dispatch={store.dispatch.bind(store)}/>
-                <Contents state={currentState.records} dispatch={store.dispatch.bind(store)}/>
+                <MainMenuContainer store={store}/>
+                <Contents state={currentState.records} store={store}/>
             </ BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')

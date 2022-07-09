@@ -1,18 +1,16 @@
-
 import classes from "./start.module.css";
 import React from "react";
-import {clearRecordActionCreator} from "../../../redux/records-reducer.js";
 
 let cb_setPage;
 //let cb_clearRecord;
-let dispatch;
+let cb_clearRecord;
 
 function pushButton_close_clicked()
 {
     // return function()
     // {
         //cb_clearRecord();
-    dispatch(clearRecordActionCreator());
+    cb_clearRecord();
     cb_setPage();
     //}
 }
@@ -20,7 +18,7 @@ function pushButton_close_clicked()
 function Result(props)
 {
     cb_setPage=props.setPage;
-    dispatch=props.dispatch;
+    cb_clearRecord=props.clearRecord;
     //cb_clearRecord=props.clearRecord;
     return(
         <div className={`${classes.resultPage} page block`}>
