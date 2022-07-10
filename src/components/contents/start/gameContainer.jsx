@@ -1,22 +1,34 @@
 import React from "react";
 import {prepareRecordActionCreator} from "../../../redux/records-reducer";
 import Game from "./game.jsx";
+import {connect} from "react-redux";
 
-let cb_dispatch;
+// let cb_dispatch;
+//
+// function prepareRecord(result)
+// {
+//     cb_dispatch(prepareRecordActionCreator(result));
+// }
+//
+// function GameContainerLegacy(props)
+// {
+//     cb_dispatch=props.store.dispatch;
+//
+//     //⟲
+//     return(
+//         <Game setPage={props.setPage} prepareRecord={prepareRecord}/>
+//     );
+// }
 
-function prepareRecord(result)
+
+function mapDispatchToProps(dispatch, ownProps)
 {
-    cb_dispatch(prepareRecordActionCreator(result));
+    return {
+        setPage: ownProps.setPage,
+        prepareRecord(result) {dispatch(prepareRecordActionCreator(result))}
+    }
 }
 
-function GameContainer(props)
-{
-    cb_dispatch=props.store.dispatch;
-
-    //⟲
-    return(
-        <Game setPage={props.setPage} prepareRecord={prepareRecord}/>
-    );
-}
+const GameContainer = connect(null,mapDispatchToProps)(Game);
 
 export default GameContainer;

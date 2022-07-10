@@ -1,20 +1,27 @@
-import classes from './main-menu.module.css';
-import {NavLink, useNavigate} from "react-router-dom";
-import {clearRecordActionCreator} from "../../redux/records-reducer.js";
+import {clearRecordActionCreator, prepareRecordActionCreator} from "../../redux/records-reducer.js";
 import MainMenu from "./main-menu.jsx";
-import store from "../../redux/redux-store";
+import {connect} from "react-redux";
 
-function MainMenuContainer(props)
+// function MainMenuContainerLegacy(props)
+// {
+//     //let navigate = useNavigate();
+//     function clearRecord()
+//     {
+//         props.store.dispatch(clearRecordActionCreator()); //.bind(store)
+//     }
+//     //<NavLink to="/" >
+//     return(
+//         <MainMenu clearRecord={clearRecord}/>
+//     )
+// }
+
+function mapDispatchToProps(dispatch)
 {
-    //let navigate = useNavigate();
-    function clearRecord()
-    {
-        props.store.dispatch(clearRecordActionCreator()); //.bind(store)
+    return {
+        clearRecord() {dispatch(clearRecordActionCreator())}
     }
-    //<NavLink to="/" >
-    return(
-        <MainMenu clearRecord={clearRecord}/>
-    )
 }
+
+const MainMenuContainer = connect(null,mapDispatchToProps)(MainMenu);
 
 export default MainMenuContainer;

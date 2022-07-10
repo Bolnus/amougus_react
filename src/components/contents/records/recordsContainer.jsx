@@ -1,17 +1,28 @@
 import Records from "./records.jsx";
+import {connect} from "react-redux";
 
-function RecordsContainer(props)
+// function RecordsContainerLegacy(props)
+// {
+//     return (
+//         <Records newRecord={props.store.getState().records.newRecord} recordsData={props.store.getState().records.recordsData} setPage={props.setPage}/>
+//     )
+// }
+
+function mapStateToProps(state)
 {
-    //console.log(recordsComponents[0]);
-    // let recordsComponents = recordsData.map(function(recordEl,index)
-    // {
-    //     return <RecordRow row={index+1} date={recordEl.date} time={recordEl.time} result={recordEl.result}/>
-    // });
-
-    //let rowNumber = 1;
-    return (
-        <Records newRecord={props.store.getState().records.newRecord} recordsData={props.store.getState().records.recordsData} setPage={props.setPage}/>
-    )
+    return {
+        newRecord: state.records.newRecord,
+        recordsData: state.records.recordsData
+    }
 }
+
+function mapDispatchToProps(dispatch, ownProps)
+{
+    return {
+        setPage: ownProps.setPage
+    }
+}
+
+const RecordsContainer = connect(mapStateToProps,mapDispatchToProps)(Records);
 
 export default RecordsContainer;

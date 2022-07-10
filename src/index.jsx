@@ -9,17 +9,21 @@ import MainMenuContainer from './components/main_menu/mainMenuContainer.jsx'; //
 import Contents from './components/contents/contents.jsx';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
-
+import {Provider} from "react-redux"
 
 function rerenderEntireTree(currentState)
 {
     //dispatch={store.dispatch.bind(store)}
+    //store={store}
+    //state={currentState.records} store={store}
     return ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
-                <Header/>
-                <MainMenuContainer store={store}/>
-                <Contents state={currentState.records} store={store}/>
+                <Provider store={store}>
+                    <Header/>
+                    <MainMenuContainer />
+                    <Contents state={currentState.records}/>
+                </Provider>
             </ BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')

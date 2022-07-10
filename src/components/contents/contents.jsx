@@ -24,8 +24,8 @@ function Contents(props)
         return(
             <div className={`${classes.contents} ${classes.contents_geometry} block`}>
                 <Routes>
-                    <Route path="/" element={<NameContainer store={props.store} setPage={function() { setState("start")}}/>}/>
-                    <Route path="/records" element={<RecordsContainer store={props.store} setPage={function() { setState("start")}} />} />
+                    <Route path="/" element={<NameContainer setPage={function() { setState("start")}}/>}/>
+                    <Route path="/records" element={<RecordsContainer setPage={function() { setState("start")}} />} />
                     <Route path="/about" element={<About setPage={function() { setState("start")}} /> }/>
                 </Routes>
             </div>
@@ -36,8 +36,8 @@ function Contents(props)
         return(
             <div className={`${classes.contents} ${classes.contents_geometry} block`}>
                 <Routes>
-                    <Route path="/" element={<ResultContainer  setPage={function() { setState("start")}} store={props.store} />}/>
-                    <Route path="/records" element={<RecordsContainer store={props.store} setPage={function() { setState("start")}} />} />
+                    <Route path="/" element={<ResultContainer  setPage={function() { setState("start")}}  />}/>
+                    <Route path="/records" element={<RecordsContainer  setPage={function() { setState("start")}} />} />
                     <Route path="/about" element={<About setPage={function() { setState("start")}} /> }/>
                 </Routes>
             </div>
@@ -48,8 +48,8 @@ function Contents(props)
         return(
             <div className={`${classes.contents} ${classes.contents_geometry} block`}>
                 <Routes>
-                    <Route path="/" element={<GameContainer setPage={function() { setState("name")}} store={props.store}/>}/>
-                    <Route path="/records" element={<RecordsContainer store={props.store} setPage={function() { setState("start")}} />} />
+                    <Route path="/" element={<GameContainer setPage={function() { setState("name")}} />}/>
+                    <Route path="/records" element={<RecordsContainer  setPage={function() { setState("start")}} />} />
                     <Route path="/about" element={<About setPage={function() { setState("start")}} /> }/>
                 </Routes>
             </div>
@@ -62,7 +62,7 @@ function Contents(props)
             <div className={`${classes.contents} ${classes.contents_geometry} block`}>
                 <Routes>
                     <Route path="/" element={<Start  setPage={function() { setState("game")}} />}/>
-                    <Route path="/records" element={<RecordsContainer store={props.store} setPage={function() { setState("start")}} />} />
+                    <Route path="/records" element={<RecordsContainer  setPage={function() { setState("start")}} />} />
                     <Route path="/about" element={<About setPage={function() { setState("start")}} /> }/>
                 </Routes>
             </div>
