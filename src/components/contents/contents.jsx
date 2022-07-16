@@ -19,7 +19,7 @@ function Contents(props)
     // {
     //     return function() {setState(pageName)};
     // }
-    if(props.state.newRecord.hasOwnProperty("name")) //state==="name"
+    if(props.newRecord.hasOwnProperty("name")) //state==="name"
     {
         return(
             <div className={`${classes.contents} ${classes.contents_geometry} block`}>
@@ -31,7 +31,7 @@ function Contents(props)
             </div>
         );
     }
-    else if(props.state.newRecord.hasOwnProperty("result"))
+    else if(props.newRecord.hasOwnProperty("result"))
     {
         return(
             <div className={`${classes.contents} ${classes.contents_geometry} block`}>

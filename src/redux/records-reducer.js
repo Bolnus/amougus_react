@@ -1,4 +1,5 @@
 import {getPlace} from "./place-getter";
+import _ from "lodash";
 
 const WRITE_RECORD="WRITE-RECORD";
 const PREPARE_RECORD="PREPARE-RECORD";
@@ -78,8 +79,10 @@ export function recordsReducer(state=initialState, action)
 {
     if(action.type===WRITE_RECORD&&state.newRecord.hasOwnProperty("result"))
     {
-        state.newRecord.place = getPlace(state, state.newRecord.result);
-        if (state.newRecord.place < maxRecords)
+        let newState=_.cloneDeep(state); //lodash deep copy
+        //newState.newRecord = state.newRecord;
+        newState.newRecord.place = getPlace(newState, newState.newRecord.result);
+        if (newState.newRecord.place < maxRecords)
         {
             let newNewRecord = {
                 "name": state.newRecord.name,
@@ -87,46 +90,57 @@ export function recordsReducer(state=initialState, action)
                 "time": state.newRecord.time,
                 "result": state.newRecord.result
             }
-            state.recordsData.splice(state.newRecord.place, 0, newNewRecord);
-            if (state.recordsData.length > maxRecords)
-                state.recordsData.pop();
+            newState.recordsData.splice(newState.newRecord.place, 0, newNewRecord);
+            if (newState.recordsData.length > maxRecords)
+                newState.recordsData.pop();
         }
-        return state;
+        return newState;
     }
     else
     {
-        switch(action.type)
-        {
+        switch(action.type) {
             case PREPARE_RECORD:
+            {
+                //console.log(PREPARE_RECORD);
                 let date = new Date();
-                let currentTime = date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
-                let month = date.getMonth()+1;
-                let currentDate = date.getDate()+'.'+month+'.'+date.getFullYear();
+                let currentTime = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+                let month = date.getMonth() + 1;
+                let currentDate = date.getDate() + '.' + month + '.' + date.getFullYear();
                 let newNewRecord = {
                     "date": currentDate,
                     "time": currentTime,
                     "result": action.result
                 };
                 let placeNumber = getPlace(state, action.result);
-                if(placeNumber<maxRecords)
-                {
-                    newNewRecord.place=placeNumber;
+                if (placeNumber < maxRecords) {
+                    newNewRecord.place = placeNumber;
                     newNewRecord.name = "AAA";
                 }
-                state.newRecord = newNewRecord;
+                let newState=_.cloneDeep(state);
+                newState.newRecord = _.cloneDeep(newNewRecord);
                 //rerenderEntireTree(this);
-                return state;
+                return newState;
+            }
             case CLEAR_RECORD:
-                state.newRecord = {};
+            {
+                let newState=_.cloneDeep(state);
+                newState.newRecord = {};
                 //rerenderEntireTree(this);
-                return state;
+                return newState;
+            }
             case UPDATE_NEW_RECORD_NAME:
-                state.newRecord.name=action.newName;
+            {
+                let newState=_.cloneDeep(state);
+                //newState.newRecord = state.newRecord;
+                newState.newRecord.name = action.newName;
                 //rerenderEntireTree(this);
-                return state;
+                return newState;
+            }
             default:
-                console.log("No such action type: "+action.type);
+            {
+                console.log("No such action type: " + action.type);
                 return state;
+            }
         }
         //console.log("No such action type: "+action.type);
     }

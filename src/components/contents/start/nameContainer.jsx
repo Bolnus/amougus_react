@@ -44,6 +44,7 @@ function mapDispatchToProps(dispatch, ownProps)
         },
         updateNewRecordName(name)
         {
+            //debugger;
             dispatch(updateNewRecordNameActionCreator(name));
         }
     }

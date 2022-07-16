@@ -1,4 +1,4 @@
-import {clearRecordActionCreator, prepareRecordActionCreator} from "../../redux/records-reducer.js";
+import {clearRecordActionCreator} from "../../redux/records-reducer.js";
 import MainMenu from "./main-menu.jsx";
 import {connect} from "react-redux";
 

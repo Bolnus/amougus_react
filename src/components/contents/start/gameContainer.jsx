@@ -25,7 +25,11 @@ function mapDispatchToProps(dispatch, ownProps)
 {
     return {
         setPage: ownProps.setPage,
-        prepareRecord(result) {dispatch(prepareRecordActionCreator(result))}
+        prepareRecord(result)
+        {
+            //debugger;
+            dispatch(prepareRecordActionCreator(result))
+        }
     }
 }
 
