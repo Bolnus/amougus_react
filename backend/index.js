@@ -3,7 +3,7 @@ let express = require("express");
 const path = require('path');
 
 let app = express();
-app.set("view engine","ejs");
+//app.set("view engine","ejs");
 
 let fullFileText = "";
 let cfgStrings = fullFileText.split("\r\n");
@@ -16,12 +16,14 @@ let img;
 app.use(express.static(path.join("../", __dirname)));
 console.log(path.join("../", __dirname)); //path.join(__dirname, "../src")
 
-app.get('/api', function(request,response)
+app.get('/recordsdata', function(request,response)
 {
     date = new Date();
-    console.log("request | "+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()+" | "+request);
-    response.json({
-        message: "HELLO!"
+    console.log("request | "+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()+" | "+request.path);
+    fileReader.readFile("backend/records.json", "UTF8", function(error,data)
+    {
+        let recordsObject = JSON.parse(data);
+        response.json(recordsObject);
     });
 });
 
@@ -31,6 +33,13 @@ app.get('/api', function(request,response)
 //     console.log("request | "+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()+" | "+request);
 //     response.render("play");
 // });
+
+app.get('*', function(request, response)
+{
+    date = new Date();
+    console.log("request | "+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()+" | 404");
+    response.status(404).sendFile(__dirname+"/404.html");
+});
 
 app.listen(portNumber);
 console.log("Listening to port "+portNumber);

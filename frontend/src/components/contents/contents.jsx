@@ -8,17 +8,26 @@ import RecordsContainer from "./records/recordsContainer.jsx";
 import GameContainer from "./start/gameContainer";
 import ResultContainer from "./start/resultContainer";
 import NameContainer from "./start/nameContainer";
+import axios from "axios";
 
 function Contents(props)
 {
     //debugger;
-    const [state, setState] = useState("start");
     console.log("contents");
     //console.log(props.state.newRecord);
-    // function setPageName(pageName)
-    // {
-    //     return function() {setState(pageName)};
-    // }
+
+    if(!props.recordsData.length)
+    {
+        let initialRecords = {};
+        axios.get("/recordsdata").then(function(response)
+        {
+            initialRecords = response.data.recordsData;
+            props.setRecordsData(initialRecords);
+        });
+
+    }
+    const [state, setState] = useState("start");
+
     if(props.newRecord.hasOwnProperty("name")) //state==="name"
     {
         return(

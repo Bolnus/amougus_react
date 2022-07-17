@@ -5,6 +5,7 @@ const WRITE_RECORD="WRITE-RECORD";
 const PREPARE_RECORD="PREPARE-RECORD";
 const CLEAR_RECORD="CLEAR-RECORD";
 const UPDATE_NEW_RECORD_NAME="UPDATE-NEW-RECORD-NAME";
+const SET_RECORDS="SET-RECORDS";
 
 let maxRecords = 5;
 
@@ -38,48 +39,26 @@ export function updateNewRecordNameActionCreator(newName)
     };
 }
 
-let initialState = {
-    recordsData: [
-        {
-            "name": "AAA",
-            "date": "5.1.2022",
-            "time": "17:17:58",
-            "result": "00-06-120"
-        },
-        {
-            "name": "AAA",
-            "date": "5.1.2022",
-            "time": "17:17:58",
-            "result": "00-06-144"
-        },
-        {
-            "name": "AAA",
-            "date": "6.1.2022",
-            "time": "18:44:39",
-            "result": "00-06-310"
-        },
-        {
-            "name": "AAA",
-            "date": "6.1.2022",
-            "time": "18:47:29",
-            "result": "00-06-410"
-        },
-        {
-            "name": "AAA",
-            "date": "6.1.2022",
-            "time": "18:58:1",
-            "result": "00-08-805"
-        }],
-    newRecord: {
+export function setRecordsActionCreator(recordsData)
+{
+    return {
+        type: SET_RECORDS,
+        recordsData: recordsData
+    };
+}
 
-    }
+let initialState = {
+    recordsData: [],
+    newRecord: {}
 }
 
 export function recordsReducer(state=initialState, action)
 {
     if(action.type===WRITE_RECORD&&state.newRecord.hasOwnProperty("result"))
     {
-        let newState=_.cloneDeep(state); //lodash deep copy
+        //lodash deep copy
+        //правильнее делать вручную,копируя только изменяемые данным action части state
+        let newState=_.cloneDeep(state);
         //newState.newRecord = state.newRecord;
         newState.newRecord.place = getPlace(newState, newState.newRecord.result);
         if (newState.newRecord.place < maxRecords)
@@ -133,6 +112,14 @@ export function recordsReducer(state=initialState, action)
                 let newState=_.cloneDeep(state);
                 //newState.newRecord = state.newRecord;
                 newState.newRecord.name = action.newName;
+                //rerenderEntireTree(this);
+                return newState;
+            }
+            case SET_RECORDS:
+            {
+                let newState=_.cloneDeep(state);
+                //newState.newRecord = state.newRecord;
+                newState.recordsData = action.recordsData;
                 //rerenderEntireTree(this);
                 return newState;
             }
