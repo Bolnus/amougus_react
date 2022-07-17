@@ -11,8 +11,9 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux"
 
+
 //state={store.getState().records}
- ReactDOM.render(
+ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
                 <Provider store={store}>
@@ -23,10 +24,35 @@ import {Provider} from "react-redux"
             </ BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')
-    );
-
+);
 
 window.store=store;
+
+// function rerenderEntireTree(currentState)
+// {
+//     return ReactDOM.render(
+//         <React.StrictMode>
+//             <BrowserRouter>
+//                 <Provider store={store}>
+//                     <Header/>
+//                     <MainMenuContainer />
+//                     <Contents state={currentState.records}/>
+//                 </Provider>
+//             </ BrowserRouter>
+//         </React.StrictMode>,
+//         document.getElementById('root')
+//     );
+// }
+//
+// function rerenderStore()
+// {
+//     let state = store.getState();
+//
+//     rerenderEntireTree(state);
+// }
+//
+// rerenderEntireTree(store.getState());
+// store.subscribe(rerenderStore);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
