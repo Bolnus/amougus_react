@@ -16,6 +16,15 @@ let img;
 app.use(express.static(path.join("../", __dirname)));
 console.log(path.join("../", __dirname)); //path.join(__dirname, "../src")
 
+function sleep(ms)
+{
+    //promise for loading debug
+    return new Promise(function(resolve)
+    {
+        setTimeout(resolve, ms);
+    });
+}
+
 app.get('/recordsdata', function(request,response)
 {
     date = new Date();
@@ -23,7 +32,11 @@ app.get('/recordsdata', function(request,response)
     fileReader.readFile("backend/records.json", "UTF8", function(error,data)
     {
         let recordsObject = JSON.parse(data);
-        response.json(recordsObject);
+        sleep(1000).then(function()
+        {
+            response.json(recordsObject);
+        });
+
     });
 });
 

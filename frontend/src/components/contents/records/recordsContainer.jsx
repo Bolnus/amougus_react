@@ -1,5 +1,6 @@
 import Records from "./records.jsx";
 import {connect} from "react-redux";
+import {setFetchingStateActionCreator} from "../../../redux/records-reducer";
 
 // function RecordsContainerLegacy(props)
 // {
@@ -12,7 +13,8 @@ function mapStateToProps(state)
 {
     return {
         newRecord: state.records.newRecord,
-        recordsData: state.records.recordsData
+        recordsData: state.records.recordsData,
+        isFetching: state.records.isFetching
     }
 }
 

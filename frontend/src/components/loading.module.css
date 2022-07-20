@@ -1,0 +1,15 @@
+.loadingPage
+{
+    background: #222226;
+}
+
+.loadingPage__image
+{
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 15%;
+    border-radius: 50%;
+}

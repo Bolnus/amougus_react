@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import Contents from "./contents.jsx";
-import {setRecordsActionCreator} from "../../redux/records-reducer.js";
+import {setFetchingStateActionCreator, setRecordsActionCreator} from "../../redux/records-reducer.js";
 
 function mapStateToProps(state)
 {
@@ -17,6 +17,10 @@ function mapDispatchToProps(dispatch)
         setRecordsData(recordsData)
         {
             dispatch(setRecordsActionCreator(recordsData));
+        },
+        setFetchingState(fetching_state)
+        {
+            dispatch(setFetchingStateActionCreator(fetching_state));
         }
     }
 }

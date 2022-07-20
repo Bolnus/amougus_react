@@ -6,6 +6,7 @@ const PREPARE_RECORD="PREPARE-RECORD";
 const CLEAR_RECORD="CLEAR-RECORD";
 const UPDATE_NEW_RECORD_NAME="UPDATE-NEW-RECORD-NAME";
 const SET_RECORDS="SET-RECORDS";
+const SET_FETCHING_STATE="SET-FETCHING-STATE";
 
 let maxRecords = 5;
 
@@ -47,9 +48,18 @@ export function setRecordsActionCreator(recordsData)
     };
 }
 
+export function setFetchingStateActionCreator(fetching_state)
+{
+    return {
+        type: SET_FETCHING_STATE,
+        fetching_state: fetching_state
+    };
+}
+
 let initialState = {
     recordsData: [],
-    newRecord: {}
+    newRecord: {},
+    isFetching: 1
 }
 
 export function recordsReducer(state=initialState, action)
@@ -121,6 +131,12 @@ export function recordsReducer(state=initialState, action)
                 //newState.newRecord = state.newRecord;
                 newState.recordsData = action.recordsData;
                 //rerenderEntireTree(this);
+                return newState;
+            }
+            case SET_FETCHING_STATE:
+            {
+                let newState=_.cloneDeep(state);
+                newState.isFetching=action.fetching_state;
                 return newState;
             }
             default:

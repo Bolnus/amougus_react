@@ -23,10 +23,12 @@ function Contents(props)
         {
             initialRecords = response.data.recordsData;
             props.setRecordsData(initialRecords);
+            props.setFetchingState(0);
         });
 
     }
     const [state, setState] = useState("start");
+
 
     if(props.newRecord.hasOwnProperty("name")) //state==="name"
     {
